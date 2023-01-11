@@ -2,8 +2,6 @@
 <ul>
   <ng-container *ngFor="let person of persons; index as i">
     <li>{{i}}) {{person.name}}: {{person.age}} years old</li>
-<!--    ....-->
-<!--    ....-->
   </ng-container>
 </ul>
 
@@ -11,8 +9,6 @@
 <ul>
   <ng-container *ngFor="let person of persons; index as i; first as isFirst; last as isLast">
     <li>{{i}}) {{person.name}}: {{person.age}} years old (first?{{isFirst}}, last? {{isLast}})</li>
-    <!--    ....-->
-    <!--    ....-->
   </ng-container>
 </ul>
 
@@ -20,7 +16,30 @@
 <ul>
   <ng-container *ngFor="let person of persons; index as i; first as isFirst; even as isEven">
     <li>{{i}}) {{person.name}}: {{person.age}} years old ({{isEven}})</li>
-    <!--    ....-->
-    <!--    ....-->
   </ng-container>
 </ul>
+
+<hr>
+
+<h5>If example 1</h5>
+<ul>
+  <ng-container *ngFor="let person of persons; index as i">
+      <li *ngIf="person.age > 40">{{i}}) {{person.name}}: {{person.age}} years old</li>
+  </ng-container>
+</ul>
+
+<h5>If example 2</h5>
+<ul>
+  <ng-container *ngFor="let person of persons; index as i">
+    <ng-template *ngIf="person.age > 40 then authorized else unauthorized"></ng-template>
+    <ng-template #authorized>
+      <li *ngIf="person.age > 40">{{i}}) {{person.name}}: {{person.age}} years old</li>
+    </ng-template>
+    <ng-template #unauthorized>
+      <li>User ({{person.name}}) is unauthorized</li>
+    </ng-template>
+  </ng-container>
+</ul>
+
+
+
