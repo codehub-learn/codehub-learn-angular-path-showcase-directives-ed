@@ -17,6 +17,8 @@ export class PersonService {
       new Person("Nikoleta", 44, "UK"),
       new Person("Menelaos", 16, "GR"),
       new Person("Anna", 78, "GR"),
+      new Person("Akis", 18, "JP"),
+      new Person("Jon", 28, "KR"),
     ];
   }
 }

@@ -1,7 +1,7 @@
 <h5>For loop example 1</h5>
 <ul>
   <ng-container *ngFor="let person of persons; index as i">
-    <li>{{i}}) {{person.name}}: {{person.age}} years old</li>
+    <li>{{i}}) {{person.name}}: {{person.age}} years old ({{person.country}})</li>
   </ng-container>
 </ul>
 
@@ -38,6 +38,44 @@
     <ng-template #unauthorized>
       <li>User ({{person.name}}) is unauthorized</li>
     </ng-template>
+  </ng-container>
+</ul>
+
+<h5>Exercise 1 (demonstration 1)</h5>
+<ul>
+  <ng-container *ngFor="let person of persons">
+    <li *ngIf="person.country === 'UK'" style="background-color: red">{{person.name}}: {{person.age}} years old</li>
+    <li *ngIf="person.country === 'USA'" style="background-color: blue">{{person.name}}: {{person.age}} years old</li>
+    <li *ngIf="person.country === 'GR'" style="background-color: green">{{person.name}}: {{person.age}} years old</li>
+  </ng-container>
+</ul>
+
+<h5>Exercise 1 (demonstration 2)</h5>
+<ul>
+  <ng-container *ngFor="let person of persons">
+    <ng-template *ngIf="person.country === 'UK' then ukPerson else elsePerson"></ng-template>
+    <ng-template #ukPerson>
+      <li style="background-color: red">{{person.name}}: {{person.age}} years old</li>
+    </ng-template>
+    <ng-template #elsePerson>
+      <ng-template *ngIf="person.country === 'USA' then usaPerson else grPerson"></ng-template>
+      <ng-template #usaPerson>
+        <li style="background-color: blue">{{person.name}}: {{person.age}} years old</li>
+      </ng-template>
+      <ng-template #grPerson>
+        <li style="background-color: green">{{person.name}}: {{person.age}} years old</li>
+      </ng-template>
+    </ng-template>
+  </ng-container>
+</ul>
+
+<h5>Switch example 1</h5>
+<ul>
+  <ng-container *ngFor="let person of persons;" [ngSwitch]="person.country">
+    <li *ngSwitchCase="'UK'" style="background-color: red">{{person.name}}: {{person.age}} years old ({{person.country}})</li>
+    <li *ngSwitchCase="'USA'" style="background-color: blue">{{person.name}}: {{person.age}} years old ({{person.country}})</li>
+    <li *ngSwitchCase="'GR'" style="background-color: green">{{person.name}}: {{person.age}} years old ({{person.country}})</li>
+    <li *ngSwitchDefault style="background-color: pink">{{person.name}}: {{person.age}} years old ({{person.country}})</li>
   </ng-container>
 </ul>
 
