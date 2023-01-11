@@ -1,11 +1,14 @@
-import {Directive, ElementRef, HostListener, Renderer2} from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, Renderer2} from '@angular/core';
 
 @Directive({
   selector: '[appColorIt]'
+  //selector: 'p[appColorIt]'
 })
 export class ColorItDirective {
 
   private coloured: boolean = false;
+
+  @Input() color: string = "pink";
 
   // compatible with nodejs etc...
   constructor(private element: ElementRef, private renderer: Renderer2) {
@@ -14,7 +17,7 @@ export class ColorItDirective {
   toggleColour(){
     console.log(this.element);
     if(!this.coloured){
-      this.renderer.setStyle(this.element.nativeElement, "color", "pink");
+      this.renderer.setStyle(this.element.nativeElement, "color", this.color);
     } else {
       this.renderer.setStyle(this.element.nativeElement, "color", "black");
     }
